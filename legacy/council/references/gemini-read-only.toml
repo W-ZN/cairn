@@ -1,0 +1,15 @@
+# Keep headless read-only turns out of Plan Mode and expose only a small
+# nonmutating tool surface. In noninteractive Gemini, ask_user is denied;
+# explicit allow rules let these read/search tools run without a prompt.
+[[rule]]
+toolName = "*"
+decision = "deny"
+priority = 900
+interactive = false
+denyMessage = "Council read-only calls allow only built-in read/search tools."
+
+[[rule]]
+toolName = ["glob", "grep_search", "list_directory", "read_file", "read_many_files", "web_fetch", "google_web_search"]
+decision = "allow"
+priority = 999
+interactive = false
